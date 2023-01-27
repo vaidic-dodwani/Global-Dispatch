@@ -10,6 +10,7 @@ import 'package:globaldispatch/Screens/Widgets/form_errors.dart';
 import 'package:globaldispatch/Screens/Widgets/log_in_button.dart';
 import 'package:globaldispatch/Screens/Widgets/logo_with_name.dart';
 import 'package:globaldispatch/Screens/Widgets/name_text_area.dart';
+import 'package:globaldispatch/static_classes.dart';
 import 'package:go_router/go_router.dart';
 
 class AddBusinessDetails extends ConsumerWidget {
@@ -74,7 +75,9 @@ class AddBusinessDetails extends ConsumerWidget {
                             owner_name: ownerNameArea.controller.text,
                             business_name: businessNameArea.controller.text);
 
-                        if (response['statusCode'] == 200) {
+                        if (response['statusCode'] == 201) {
+                          App.isLoggedIn = true;
+
                           context.goNamed(RouteNames.homePage);
                         } else {
                           addBusinessOwnerNameErrorNotifier

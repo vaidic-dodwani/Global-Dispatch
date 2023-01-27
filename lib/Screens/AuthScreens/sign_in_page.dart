@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Config/api_integration.dart';
@@ -77,14 +79,15 @@ class SignInPage extends ConsumerWidget {
                         email: emailField.controller.text,
                         password: passwordField.controller.text);
                     if (response['statusCode'] == 200) {
-                      User.access = response['tokens']['access'];
+                      App.acesss = response['tokens']['access'];
                       final prefs = await SharedPreferences.getInstance();
-                      prefs.setString('access', User.access!);
+                      log(App.acesss!);
+                      prefs.setString('access', App.acesss!);
                       App.isLoggedIn = true;
                       context.goNamed(RouteNames.homePage);
                     } else {
                       signInPasswordErrorNotifer
-                          .setVal(response[response.keys.first][0]);
+                          .setVal(response[response.keys.first]);
                     }
                     signInButtonLoaderNotifier.toggle();
                   }
