@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
+import 'package:globaldispatch/static_classes.dart';
 
 PreferredSize homeAppBar() {
   return PreferredSize(
@@ -19,7 +20,7 @@ PreferredSize homeAppBar() {
           ),
         ),
         title: Text(
-          "asdasdss",
+         User.businessName??"" ,
           style: bodyMedium(),
         ),
       ),
