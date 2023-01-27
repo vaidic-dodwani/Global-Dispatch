@@ -50,8 +50,8 @@ class AppRouter {
             ),
           ]),
       GoRoute(
-          name: RouteNames.signUp,
-          path: '/signup',
+          name: RouteNames.homePage,
+          path: '/homepage',
           pageBuilder: (context, state) {
             return MaterialPage(
               child: SignUpPage(),
@@ -74,12 +74,25 @@ class AppRouter {
                     path: 'businessdetails',
                     pageBuilder: (context, state) {
                       return MaterialPage(
-                        child: AddBusinessDetails(),
+                        child: OtpPage(
+                          email: state.params['email']!,
+                        ),
                       );
                     },
-                  )
-                ])
-          ]),
+                    routes: [
+                      GoRoute(
+                        name: RouteNames.businessDetails,
+                        path: 'businessdetails',
+                        pageBuilder: (context, state) {
+                          return MaterialPage(
+                            child: AddBusinessDetails(),
+                          );
+                        },
+                      )
+                    ])
+              ])
+        ],
+      )
     ],
   );
 }

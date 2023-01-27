@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Config/api_integration.dart';
 import 'package:globaldispatch/Riverpod/riverpod_variables.dart';
+import 'package:globaldispatch/Routing/route_names.dart';
 import 'package:globaldispatch/Screens/Widgets/auth_heading.dart';
 import 'package:globaldispatch/Screens/Widgets/email_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/form_errors.dart';
@@ -12,6 +13,7 @@ import 'package:globaldispatch/Screens/Widgets/logo_with_name.dart';
 import 'package:globaldispatch/Screens/Widgets/password_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/sign_in_up_tabs.dart';
 import 'package:globaldispatch/static_classes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInPage extends ConsumerWidget {
@@ -75,9 +77,11 @@ class SignInPage extends ConsumerWidget {
                         email: emailField.controller.text,
                         password: passwordField.controller.text);
                     if (response['statusCode'] == 200) {
-                      User.access = response['access'];
+                      User.access = response['tokens']['access'];
                       final prefs = await SharedPreferences.getInstance();
                       prefs.setString('access', User.access!);
+                      App.isLoggedIn = true;
+                      context.goNamed(RouteNames.homePage);
                     } else {
                       signInPasswordErrorNotifer
                           .setVal(response[response.keys.first][0]);
