@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:globaldispatch/Config/api_links.dart';
-import 'package:globaldispatch/Screens/AuthScreens/add_business_details.dart';
+import 'package:globaldispatch/static_classes.dart';
 import 'package:http/http.dart';
 
 class ApiCalls {
@@ -107,9 +107,10 @@ class ApiCalls {
         Uri.parse(Links.prefixLink + Links.addBusinessDetails),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
         },
         body: jsonEncode(
-          <String, dynamic>{"name": owner_name, 'business_name': business_name},
+          <String, dynamic>{"name": business_name, 'owner_name': owner_name},
         ),
       );
       final output = jsonDecode(response.body);
@@ -119,6 +120,22 @@ class ApiCalls {
       return output;
     } catch (e) {
       log(e.toString());
+    }
+  }
+
+  static Future<dynamic> getUserDetails() async {
+    try {
+      Response response = await get(
+        Uri.parse(Links.prefixLink + Links.addBusinessDetails),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+      final output = jsonDecode(response.body);
+      return output;
+    } catch (e) {
+      log("$e");
     }
   }
 }

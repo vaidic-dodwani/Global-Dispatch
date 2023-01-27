@@ -42,7 +42,8 @@ class OtpPage extends StatelessWidget {
                       await ApiCalls.signUp(
                           email: email, password: User.password!);
 
-                      context.goNamed(RouteNames.businessDetails);
+                      context.goNamed(RouteNames.businessDetails,
+                          params: {'email': email});
                     } else {
                       ToastContext().init(context);
                       Toast.show(response[response.keys.first][0],

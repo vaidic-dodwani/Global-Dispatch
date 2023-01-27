@@ -29,36 +29,38 @@ class AppRouter {
         },
       ),
       GoRoute(
-          name: RouteNames.signUp,
-          path: '/signup',
-          pageBuilder: (context, state) {
-            return MaterialPage(
-              child: SignUpPage(),
-            );
-          },
-          routes: [
-            GoRoute(
-                name: RouteNames.otp,
-                path: 'otppage:/email',
+        name: RouteNames.signUp,
+        path: '/signup',
+        pageBuilder: (context, state) {
+          return MaterialPage(
+            child: SignUpPage(),
+          );
+        },
+        routes: [
+          GoRoute(
+            name: RouteNames.otp,
+            path: 'otppage/:email',
+            pageBuilder: (context, state) {
+              return MaterialPage(
+                child: OtpPage(
+                  email: state.params['email']!,
+                ),
+              );
+            },
+            routes: [
+              GoRoute(
+                name: RouteNames.businessDetails,
+                path: 'businessdetails',
                 pageBuilder: (context, state) {
                   return MaterialPage(
-                    child: OtpPage(
-                      email: state.params['email']!,
-                    ),
+                    child: AddBusinessDetails(),
                   );
                 },
-                routes: [
-                  GoRoute(
-                    name: RouteNames.businessDetails,
-                    path: 'businessdetails',
-                    pageBuilder: (context, state) {
-                      return MaterialPage(
-                        child: AddBusinessDetails(),
-                      );
-                    },
-                  )
-                ])
-          ]),
+              )
+            ],
+          )
+        ],
+      ),
     ],
   );
 }
