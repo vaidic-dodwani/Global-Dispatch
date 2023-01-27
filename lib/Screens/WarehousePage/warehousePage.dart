@@ -33,11 +33,11 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
               onPressed: () {
                 context.go("/homepage/warehousePage/items");
               },
-              child: Icon(
+              child: const Icon(
                 Icons.add,
               )),
           appBar: AppBar(
-            leading: Icon(
+            leading: const Icon(
               Icons.warehouse,
               color: Palette.primaryColor,
             ),
@@ -114,7 +114,7 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
                               Container(
                                 height: 200,
                                 width: 50,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     color: Palette.neutralGrey,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(200))),
@@ -125,7 +125,7 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
                                             100) *
                                         200,
                                 width: 50,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     color: Palette.primaryColor,
                                     borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(200),
@@ -165,7 +165,7 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
                   );
                 },
                 error: (error, stackTrace) => Text(error.toString()),
-                loading: () => Center(
+                loading: () => const Center(
                   child: CircularProgressIndicator(),
                 ),
               ))
@@ -177,7 +177,7 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
         log(stackTrace.toString());
         return Text(error.toString());
       },
-      loading: () => Center(child: CircularProgressIndicator()),
+      loading: () => const Center(child: CircularProgressIndicator()),
     );
   }
 }

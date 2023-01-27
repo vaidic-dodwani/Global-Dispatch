@@ -14,6 +14,6 @@ class _ItemsAddState extends ConsumerState<ItemsAdd> {
   Widget build(BuildContext context) {
     final id = ref.watch(warehouseid);
 
-    return Scaffold();
+    return const Scaffold();
   }
 }

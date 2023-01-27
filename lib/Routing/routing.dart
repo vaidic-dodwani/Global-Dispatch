@@ -10,7 +10,6 @@ import 'package:globaldispatch/Screens/AuthScreens/sign_up_page.dart';
 import 'package:globaldispatch/Screens/HomePage/home_page.dart';
 import 'package:globaldispatch/Screens/Items/items.dart';
 import 'package:globaldispatch/Screens/WarehousePage/warehousePage.dart';
-import 'package:globaldispatch/static_classes.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -20,7 +19,7 @@ class AppRouter {
         name: RouteNames.root,
         path: '/',
         pageBuilder: (context, state) {
-          return MaterialPage(
+          return const MaterialPage(
               // child: App.isLoggedIn ? const HomePage() : SignInPage());
               child: HomePage());
         },
@@ -38,7 +37,7 @@ class AppRouter {
           name: RouteNames.homePage,
           path: '/homepage',
           pageBuilder: (context, state) {
-            return MaterialPage(
+            return const MaterialPage(
               child: HomePage(),
             );
           },
@@ -47,7 +46,7 @@ class AppRouter {
                 name: RouteNames.warehousePage,
                 path: 'warehousePage',
                 pageBuilder: (context, state) {
-                  return MaterialPage(
+                  return const MaterialPage(
                     child: WarehousePage(),
                   );
                 },
@@ -56,7 +55,7 @@ class AppRouter {
                     name: RouteNames.items,
                     path: 'items',
                     pageBuilder: (context, state) {
-                      return MaterialPage(
+                      return const MaterialPage(
                         child: ItemsAdd(),
                       );
                     },
@@ -66,7 +65,7 @@ class AppRouter {
               name: RouteNames.newWarehouse,
               path: 'newwarehouse',
               pageBuilder: (context, state) {
-                return MaterialPage(
+                return const MaterialPage(
                   child: NewWarehouse(),
                 );
               },

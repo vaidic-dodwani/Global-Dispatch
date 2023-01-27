@@ -27,8 +27,8 @@ class _WarehouseState extends ConsumerState<Warehouse> {
           children: [
             Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16),
+                const Padding(
+                  padding: EdgeInsets.only(left: 16),
                   child: Icon(
                     Icons.warehouse,
                     color: Palette.primaryColor,
@@ -70,7 +70,7 @@ class _WarehouseState extends ConsumerState<Warehouse> {
                       style: bodySmall(),
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 10,
                   )

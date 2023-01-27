@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:globaldispatch/static_classes.dart';
 
 class Warehouse_services {
   getWarehouse() async {

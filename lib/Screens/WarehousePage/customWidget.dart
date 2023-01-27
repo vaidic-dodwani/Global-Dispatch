@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 
 class Item extends ConsumerStatefulWidget {
@@ -26,6 +25,10 @@ class _ItemState extends ConsumerState<Item> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Container(
           height: 72 * 1.5,
+          width: MediaQuery.of(context).size.width * 0.8,
+          decoration: const BoxDecoration(
+              color: Palette.neutralBlack,
+              borderRadius: BorderRadius.all(Radius.circular(8))),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
@@ -33,7 +36,7 @@ class _ItemState extends ConsumerState<Item> {
               children: [
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.inventory,
                       color: Palette.primaryColor,
                       size: 30,
@@ -75,11 +78,7 @@ class _ItemState extends ConsumerState<Item> {
                 )
               ],
             ),
-          ),
-          width: MediaQuery.of(context).size.width * 0.8,
-          decoration: BoxDecoration(
-              color: Palette.neutralBlack,
-              borderRadius: BorderRadius.all(Radius.circular(8)))),
+          )),
     );
   }
 }

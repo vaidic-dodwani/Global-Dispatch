@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -81,7 +83,7 @@ class _NewWarehouseState extends ConsumerState<NewWarehouse> {
                     duration: 5, gravity: Toast.bottom);
               }
             },
-            child: Container(
+            child: const SizedBox(
                 height: 56, child: Center(child: Text("Add Warehouse")))));
   }
 }
