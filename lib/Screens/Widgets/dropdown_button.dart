@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DropDownWidget extends StatefulWidget {
-  const DropDownWidget({super.key});
+  DropDownWidget({super.key});
+  int id = 2;
 
   @override
   State<DropDownWidget> createState() => _DropDownWidgetState();
@@ -21,7 +22,6 @@ var items = [
   'Oil seed oleagic fruits grain seed fruit etc ne'
 ];
 int selected = 0;
-int id = 2;
 
 class _DropDownWidgetState extends State<DropDownWidget> {
   @override
@@ -40,7 +40,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
       onChanged: (value) {
         setState(() {
           selected = items.indexOf(value!);
-          id = selected + 2;
+          widget.id = selected + 2;
         });
       },
     );

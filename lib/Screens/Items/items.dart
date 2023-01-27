@@ -1,8 +1,8 @@
+// ignore_for_file: use_build_context_synchronously, unused_result
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:globaldispatch/Screens/AddnewWarehouse/services.dart';
-import 'package:globaldispatch/Screens/HomePage/provider.dart';
 import 'package:globaldispatch/Screens/Items/services.dart';
 import 'package:globaldispatch/Screens/WarehousePage/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/dropdown_button.dart';
@@ -17,6 +17,8 @@ class ItemsAdd extends ConsumerStatefulWidget {
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ItemsAddState();
 }
+
+final dropDown = DropDownWidget();
 
 class _ItemsAddState extends ConsumerState<ItemsAdd> {
   final locationArea = EmailTextArea(
@@ -82,7 +84,7 @@ class _ItemsAddState extends ConsumerState<ItemsAdd> {
                     padding: const EdgeInsets.only(top: 24.0), child: volume),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: DropDownWidget(),
+                  child: dropDown,
                 )
               ]),
         ),
@@ -97,7 +99,7 @@ class _ItemsAddState extends ConsumerState<ItemsAdd> {
                   int.parse(capacity.controller.text),
                   int.parse(volume.controller.text),
                   ref.watch(warehouseid),
-                  2);
+                  dropDown.id);
               ToastContext().init(context);
 
               if (res) {
@@ -111,8 +113,8 @@ class _ItemsAddState extends ConsumerState<ItemsAdd> {
                     duration: 5, gravity: Toast.bottom);
               }
             },
-            child:
-                Container(height: 56, child: Center(child: Text("Add Item")))));
+            child: const SizedBox(
+                height: 56, child: Center(child: Text("Add Item")))));
   }
 }
 
