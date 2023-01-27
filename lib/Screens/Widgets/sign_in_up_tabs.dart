@@ -15,9 +15,10 @@ class SignInUpTabs extends StatelessWidget {
           onTap: () {
             context.goNamed(RouteNames.signIn);
           },
-          child: SizedBox(
+          child: Container(
             height: 44,
             width: 156,
+            // color: Colors.amber,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -47,6 +48,7 @@ class SignInUpTabs extends StatelessWidget {
             context.goNamed(RouteNames.signUp);
           },
           child: SizedBox(
+            // color: Colors.amber,
             height: 44,
             width: 156,
             child: Column(
