@@ -5,7 +5,7 @@ import 'package:globaldispatch/Routing/routing.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.remove();
+  // FlutterNativeSplash.remove();
   runApp(const ProviderScope(child: MyApp()));
 }
 
