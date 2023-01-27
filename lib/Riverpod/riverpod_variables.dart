@@ -75,3 +75,23 @@ final signUpConfirmPasswordErrorProvider =
   });
   return signUpConfirmPasswordErrorNotifer;
 });
+
+// HomePage
+
+HomeBottomNavNotifier homeBottomNavNotifier = HomeBottomNavNotifier();
+
+final homeBottomNavProvider = StateNotifierProvider<HomeBottomNavNotifier, int>(
+    (ref) => homeBottomNavNotifier);
+
+// OTP PAge
+
+ButtonLoaderNotifier forgetPassOtpButtonLoaderNotifier = ButtonLoaderNotifier();
+
+final forgetPassOtpButtonLoaderProvider =
+    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+  ref.onDispose(() {
+    forgetPassOtpButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+
+  return forgetPassOtpButtonLoaderNotifier;
+});
