@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Config/api_integration.dart';
 import 'package:globaldispatch/Riverpod/riverpod_variables.dart';
+import 'package:globaldispatch/Routing/route_names.dart';
 import 'package:globaldispatch/Screens/Widgets/auth_heading.dart';
 import 'package:globaldispatch/Screens/Widgets/email_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/form_errors.dart';
@@ -10,6 +12,7 @@ import 'package:globaldispatch/Screens/Widgets/log_in_button.dart';
 import 'package:globaldispatch/Screens/Widgets/logo_with_name.dart';
 import 'package:globaldispatch/Screens/Widgets/password_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/sign_in_up_tabs.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpPage extends ConsumerWidget {
   SignUpPage({super.key});
@@ -81,7 +84,29 @@ class SignUpPage extends ConsumerWidget {
                 text: "Sign Up",
                 loaderProvider: signUpEmailButtonLoaderProvider,
                 function: () async {
-                  if (signUpEmailErrorNotifer.valid) {}
+                  if (signUpEmailErrorNotifer.valid) {
+                    if (passArea.controller.text ==
+                        confirmPassArea.controller.text) {
+                      signUpEmailButtonLoaderNotifier.toggle();
+
+                      final response = await ApiCalls.sendEmailOTP(
+                        email: emailField.controller.text,
+                      );
+
+                      if (response['statusCode'] == 201) {
+                        context.goNamed(RouteNames.otp,
+                            params: {'email': emailField.controller.text});
+                      } else {
+                        signUpConfirmPasswordErrorNotifer
+                            .setVal(response.keys.first[0]);
+                      }
+
+                      signUpEmailButtonLoaderNotifier.toggle();
+                    } else {
+                      signUpConfirmPasswordErrorNotifer
+                          .setVal("Passwords Dont Match");
+                    }
+                  }
                 },
               ),
               const SizedBox(height: 20),

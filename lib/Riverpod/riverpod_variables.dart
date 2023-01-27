@@ -95,3 +95,37 @@ final forgetPassOtpButtonLoaderProvider =
 
   return forgetPassOtpButtonLoaderNotifier;
 });
+
+
+// Add business details
+
+NameErrorNotifier addBusinessNameErrorNotifier = NameErrorNotifier();
+
+final addBusinessNameErrorProvider =
+    StateNotifierProvider.autoDispose<NameErrorNotifier, String>((ref) {
+  ref.onDispose(() {
+    addBusinessNameErrorNotifier = NameErrorNotifier();
+  });
+  return addBusinessNameErrorNotifier;
+});
+
+NameErrorNotifier addBusinessOwnerNameErrorNotifier = NameErrorNotifier();
+
+final addBusinessOwnerNameErrorProvider =
+    StateNotifierProvider.autoDispose<NameErrorNotifier, String>((ref) {
+  ref.onDispose(() {
+    addBusinessOwnerNameErrorNotifier = NameErrorNotifier();
+  });
+  return addBusinessOwnerNameErrorNotifier;
+});
+
+ButtonLoaderNotifier addBusinessDetailsButtonLoaderNotifier = ButtonLoaderNotifier();
+
+final addBusinessDetailsButtonLoaderProvider =
+    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+  ref.onDispose(() {
+    addBusinessDetailsButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+
+  return addBusinessDetailsButtonLoaderNotifier;
+});

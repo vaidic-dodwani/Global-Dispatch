@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Config/api_integration.dart';
 import 'package:globaldispatch/Riverpod/riverpod_variables.dart';
 import 'package:globaldispatch/Screens/Widgets/auth_heading.dart';
 import 'package:globaldispatch/Screens/Widgets/email_text_area.dart';
@@ -10,6 +11,8 @@ import 'package:globaldispatch/Screens/Widgets/log_in_button.dart';
 import 'package:globaldispatch/Screens/Widgets/logo_with_name.dart';
 import 'package:globaldispatch/Screens/Widgets/password_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/sign_in_up_tabs.dart';
+import 'package:globaldispatch/static_classes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInPage extends ConsumerWidget {
   SignInPage({super.key});
@@ -66,7 +69,21 @@ class SignInPage extends ConsumerWidget {
                 loaderProvider: signInButtonLoaderProvider,
                 function: () async {
                   if (signInEmailErrorNotifer.valid &&
-                      signInPasswordErrorNotifer.valid) {}
+                      signInPasswordErrorNotifer.valid) {
+                    signInButtonLoaderNotifier.toggle();
+                    final response = await ApiCalls.signIn(
+                        email: emailField.controller.text,
+                        password: passwordField.controller.text);
+                    if (response['statusCode'] == 200) {
+                      User.access = response['access'];
+                      final prefs = await SharedPreferences.getInstance();
+                      prefs.setString('access', User.access!);
+                    } else {
+                      signInPasswordErrorNotifer
+                          .setVal(response[response.keys.first][0]);
+                    }
+                    signInButtonLoaderNotifier.toggle();
+                  }
                 },
               ),
               const SizedBox(height: 20),

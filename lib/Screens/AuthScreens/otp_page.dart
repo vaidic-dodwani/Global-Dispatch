@@ -1,15 +1,19 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:globaldispatch/Config/api_integration.dart';
 import 'package:globaldispatch/Riverpod/riverpod_variables.dart';
+import 'package:globaldispatch/Routing/route_names.dart';
 import 'package:globaldispatch/Screens/Widgets/logo_with_name.dart';
 import 'package:globaldispatch/Screens/Widgets/otp_box.dart';
+import 'package:globaldispatch/static_classes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:toast/toast.dart';
 
-class ForgetPassOtpPage extends StatelessWidget {
+class OtpPage extends StatelessWidget {
   final String email;
 
-  const ForgetPassOtpPage({super.key, required this.email});
+  const OtpPage({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +34,25 @@ class ForgetPassOtpPage extends StatelessWidget {
                 OtpBox(
                   loaderProvider: forgetPassOtpButtonLoaderProvider,
                   sentAt: 'email address',
-                  buttonFunction: (pin) async {},
-                  resendFunction: () async {
-                    ToastContext().init(context);
+                  buttonFunction: (pin) async {
                     forgetPassOtpButtonLoaderNotifier.toggle();
+                    final response =
+                        await ApiCalls.verifyEmailOTP(email: email, otp: pin);
+                    if (response['statusCode'] == 200) {
+                      await ApiCalls.signUp(
+                          email: email, password: User.password!);
+
+                      context.goNamed(RouteNames.businessDetails);
+                    } else {
+                      ToastContext().init(context);
+                      Toast.show(response[response.keys.first][0],
+                          duration: 5, gravity: Toast.bottom);
+                    }
 
                     forgetPassOtpButtonLoaderNotifier.toggle();
+                  },
+                  resendFunction: () async {
+                    ToastContext().init(context);
                   },
                 ),
               ],
