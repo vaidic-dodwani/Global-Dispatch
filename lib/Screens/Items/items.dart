@@ -5,6 +5,7 @@ import 'package:globaldispatch/Screens/AddnewWarehouse/services.dart';
 import 'package:globaldispatch/Screens/HomePage/provider.dart';
 import 'package:globaldispatch/Screens/Items/services.dart';
 import 'package:globaldispatch/Screens/WarehousePage/provider.dart';
+import 'package:globaldispatch/Screens/Widgets/dropdown_button.dart';
 import 'package:globaldispatch/Screens/Widgets/email_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 import 'package:globaldispatch/static_classes.dart';
@@ -79,6 +80,10 @@ class _ItemsAddState extends ConsumerState<ItemsAdd> {
                 ),
                 Padding(
                     padding: const EdgeInsets.only(top: 24.0), child: volume),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: DropDownWidget(),
+                )
               ]),
         ),
         bottomNavigationBar: ElevatedButton(
