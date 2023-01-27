@@ -21,7 +21,8 @@ class AppRouter {
         path: '/',
         pageBuilder: (context, state) {
           return MaterialPage(
-              child: App.isLoggedIn ? const HomePage() : SignInPage());
+              // child: App.isLoggedIn ? const HomePage() : SignInPage());
+              child: HomePage());
         },
       ),
       GoRoute(

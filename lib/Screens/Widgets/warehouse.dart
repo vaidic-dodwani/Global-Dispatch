@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 
 class Warehouse extends ConsumerStatefulWidget {
-  const Warehouse({super.key});
+  const Warehouse({super.key, this.location, this.capacity});
+  final location;
+  final capacity;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _WarehouseState();
@@ -40,13 +42,13 @@ class _WarehouseState extends ConsumerState<Warehouse> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Location, India",
+                        "${widget.location}",
                         style: titleMedium(),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0),
                         child: Text(
-                          "Capacity : ${10}",
+                          "Capacity : ${widget.capacity}",
                           style: bodyMedium(fontColor: Palette.neutralGrey),
                         ),
                       )

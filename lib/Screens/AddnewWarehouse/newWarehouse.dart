@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Screens/AddnewWarehouse/services.dart';
+import 'package:globaldispatch/Screens/HomePage/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/email_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
+import 'package:toast/toast.dart';
 
 class NewWarehouse extends ConsumerStatefulWidget {
   const NewWarehouse({super.key});
@@ -17,9 +20,9 @@ class _NewWarehouseState extends ConsumerState<NewWarehouse> {
     hintText: "Enter Warehouse Location",
   );
 
-  final capacity = EmailTextArea(
-    labelText: "Maximum Capacity",
+  final capacity = LocationTextArea(
     hintText: "Enter Maximum Capacity",
+    labelText: "Maximum Capacity",
   );
 
   int cap = 0;
@@ -57,14 +60,27 @@ class _NewWarehouseState extends ConsumerState<NewWarehouse> {
                 ),
               ),
               Padding(
-                  padding: const EdgeInsets.only(top: 24.0),
-                  child: LocationTextArea(
-                    hintText: "Enter Maximum Capacity",
-                    labelText: "Maximum Capacity",
-                  )),
+                  padding: const EdgeInsets.only(top: 24.0), child: capacity),
             ]),
         bottomNavigationBar: ElevatedButton(
-            onPressed: () {},
+            onPressed: () async {
+              if (locationArea.controller.text.isEmpty ||
+                  capacity.controller.text.isEmpty) return;
+              NewWarehouse_service api = NewWarehouse_service();
+              var res = await api.addWarehouse(locationArea.controller.text,
+                  int.parse(capacity.controller.text));
+              ToastContext().init(context);
+
+              if (res) {
+                Toast.show("Warehouse Created",
+                    duration: 5, gravity: Toast.bottom);
+                ref.refresh(warehouse_data);
+                Navigator.pop(context);
+              } else {
+                Toast.show("Error Occured Try Again",
+                    duration: 5, gravity: Toast.bottom);
+              }
+            },
             child: Container(
                 height: 56, child: Center(child: Text("Add Warehouse")))));
   }

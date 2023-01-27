@@ -75,7 +75,7 @@ class SignInPage extends ConsumerWidget {
                         email: emailField.controller.text,
                         password: passwordField.controller.text);
                     if (response['statusCode'] == 200) {
-                      User.access = response['access'];
+                      User.access = response['tokens']["access"];
                       final prefs = await SharedPreferences.getInstance();
                       prefs.setString('access', User.access!);
                     } else {

@@ -4,6 +4,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Screens/HomePage/provider.dart';
+import 'package:globaldispatch/Screens/WarehousePage/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/auth_heading.dart';
 import 'package:globaldispatch/Screens/Widgets/warehouse.dart';
 import 'package:go_router/go_router.dart';
@@ -13,6 +15,8 @@ class HomeTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final data = ref.watch(warehouse_data);
+    
     return SizedBox(
       height: double.infinity,
       width: double.infinity,
@@ -27,27 +31,39 @@ class HomeTab extends ConsumerWidget {
                 authTitleMediumText("Your Warehouse"),
                 ElevatedButton(
                     onPressed: () {
-
                       context.go("/homepage/newwarehouse");
-                    }, child: Text("Add New Warehouse"))
+                    },
+                    child: Text("Add New Warehouse"))
               ],
             ),
             const SizedBox(height: 24),
             Expanded(
-              child: ListView.builder(
-                itemCount: 100,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          context.go("/homepage/warehousePage");
-                        },
-                        child: Warehouse()),
-                  );
-                },
-              ),
-            )
+                child: data.when(
+              data: (data) {
+                return ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            ref.watch(warehouseid.notifier).state = data[index]["id"];
+                            context.go("/homepage/warehousePage?id=${data[index]["id"]}");
+                          },
+                          child: Warehouse(
+                            location: data[index]["location"],
+                            capacity: data[index]["max_capacity"] -
+                                data[index]["present_capacity"],
+                          )),
+                    );
+                  },
+                );
+              },
+              error: (error, stackTrace) {
+                return Text(error.toString());
+              },
+              loading: () => Center(child: CircularProgressIndicator()),
+            ))
           ],
         ),
       ),

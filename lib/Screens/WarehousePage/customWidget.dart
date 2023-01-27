@@ -4,7 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 
 class Item extends ConsumerStatefulWidget {
-  const Item({super.key});
+  const Item({super.key, this.name, this.catog, this.quantity, this.volume});
+  final name;
+  final catog;
+  final quantity;
+  final volume;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ItemState();
@@ -16,6 +20,8 @@ class _ItemState extends ConsumerState<Item> {
   String catog = "Catog CatogCatog CatogCatog CatogCatog Catog";
   @override
   Widget build(BuildContext context) {
+    name = widget.name;
+    catog = widget.catog.toString();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Container(
@@ -60,9 +66,9 @@ class _ItemState extends ConsumerState<Item> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("Quantity: 5"),
+                    Text("Quantity: ${widget.quantity}"),
                     Text(
-                      "100 m3",
+                      "${widget.volume} m3",
                       style: bodySmall(),
                     )
                   ],
