@@ -4,4 +4,5 @@ class RouteNames {
   static const String signUp = "signup";
   static const String homePage = "homepage";
   static const String warehousePage = "warehousepage";
+  static const String newWarehouse = "newwarehouse";
 }
