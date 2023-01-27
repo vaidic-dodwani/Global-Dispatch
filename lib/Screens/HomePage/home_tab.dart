@@ -5,6 +5,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Screens/Widgets/auth_heading.dart';
+import 'package:globaldispatch/Screens/Widgets/warehouse.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeTab extends ConsumerWidget {
   const HomeTab({super.key});
@@ -19,10 +21,30 @@ class HomeTab extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            authTitleMediumText("My Holdings"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                authTitleMediumText("Your Warehouse"),
+                ElevatedButton(
+                    onPressed: () {}, child: Text("Add New Warehouse"))
+              ],
+            ),
             const SizedBox(height: 24),
-            authTitleMediumText("Crypto News"),
-            const SizedBox(height: 8),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 100,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          context.go("/homepage/warehousePage");
+                        },
+                        child: Warehouse()),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),

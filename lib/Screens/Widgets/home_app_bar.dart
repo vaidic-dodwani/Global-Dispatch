@@ -13,7 +13,7 @@ PreferredSize homeAppBar() {
         leading: const Padding(
           padding: EdgeInsets.only(left: 20.0),
           child: CircleAvatar(
-            backgroundColor: Colors.white,
+            // backgroundColor: Colors.white,
             radius: 24,
             backgroundImage: AssetImage("assests/logo/logo.png"),
           ),

@@ -45,6 +45,7 @@ TextStyle titleMedium({Color fontColor = Palette.secondaryOffWhiteColor}) => Tex
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w700,
+      
     );
 
 TextStyle titleSmall({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
