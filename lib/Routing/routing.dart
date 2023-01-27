@@ -8,8 +8,8 @@ import 'package:globaldispatch/Screens/AddnewWarehouse/newWarehouse.dart';
 import 'package:globaldispatch/Screens/AuthScreens/sign_in_page.dart';
 import 'package:globaldispatch/Screens/AuthScreens/sign_up_page.dart';
 import 'package:globaldispatch/Screens/HomePage/home_page.dart';
+import 'package:globaldispatch/Screens/Items/items.dart';
 import 'package:globaldispatch/Screens/WarehousePage/warehousePage.dart';
-import 'package:globaldispatch/Screens/HomePage/home_page.dart';
 import 'package:globaldispatch/static_classes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -44,14 +44,24 @@ class AppRouter {
           },
           routes: [
             GoRoute(
-              name: RouteNames.warehousePage,
-              path: 'warehousePage',
-              pageBuilder: (context, state) {
-                return MaterialPage(
-                  child: WarehousePage(),
-                );
-              },
-            ),
+                name: RouteNames.warehousePage,
+                path: 'warehousePage',
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: WarehousePage(),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    name: RouteNames.items,
+                    path: 'items',
+                    pageBuilder: (context, state) {
+                      return MaterialPage(
+                        child: ItemsAdd(),
+                      );
+                    },
+                  ),
+                ]),
             GoRoute(
               name: RouteNames.newWarehouse,
               path: 'newwarehouse',
@@ -73,7 +83,7 @@ class AppRouter {
           routes: [
             GoRoute(
                 name: RouteNames.otp,
-                path: 'otppage:/email',
+                path: 'otppage/:email',
                 pageBuilder: (context, state) {
                   return MaterialPage(
                     child: OtpPage(

@@ -4,7 +4,9 @@ class App {
 }
 
 class User {
-static String? email;
-  static String? access;
+  static int? id;
+  static String? businessName;
+  static String? name;
+  static String? email;
   static String? password;
 }

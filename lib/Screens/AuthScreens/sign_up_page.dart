@@ -12,6 +12,7 @@ import 'package:globaldispatch/Screens/Widgets/log_in_button.dart';
 import 'package:globaldispatch/Screens/Widgets/logo_with_name.dart';
 import 'package:globaldispatch/Screens/Widgets/password_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/sign_in_up_tabs.dart';
+import 'package:globaldispatch/static_classes.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpPage extends ConsumerWidget {
@@ -94,6 +95,7 @@ class SignUpPage extends ConsumerWidget {
                       );
 
                       if (response['statusCode'] == 201) {
+                        User.password = confirmPassArea.controller.text;
                         context.goNamed(RouteNames.otp,
                             params: {'email': emailField.controller.text});
                       } else {

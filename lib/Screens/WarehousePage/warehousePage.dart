@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Screens/WarehousePage/customWidget.dart';
 import 'package:globaldispatch/Screens/WarehousePage/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
+import 'package:go_router/go_router.dart';
 
 class WarehousePage extends ConsumerStatefulWidget {
   const WarehousePage({super.key, this.id});
@@ -27,6 +28,14 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
         max = data["max_capacity"];
         curr = data["present_capacity"];
         return Scaffold(
+          floatingActionButton: FloatingActionButton(
+              backgroundColor: Palette.primaryColor,
+              onPressed: () {
+                context.go("/homepage/warehousePage/items");
+              },
+              child: Icon(
+                Icons.add,
+              )),
           appBar: AppBar(
             leading: Icon(
               Icons.warehouse,
@@ -56,24 +65,28 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     "Max Capacity: ",
                                     style: titleMedium(),
                                     textAlign: TextAlign.start,
                                   ),
-                                  Text(
-                                    "${max} m3",
-                                    style: titleMedium(
-                                        fontColor: Palette.primaryColor),
-                                    textAlign: TextAlign.start,
+                                  SizedBox(
+                                    child: Text(
+                                      "${max} m3",
+                                      style: titleMedium(
+                                          fontColor: Palette.primaryColor),
+                                      textAlign: TextAlign.start,
+                                    ),
                                   ),
                                 ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 16.0),
-                                child: Row(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       "Current Capacity: ",
@@ -81,7 +94,7 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
                                       textAlign: TextAlign.start,
                                     ),
                                     Text(
-                                      "${curr} m3",
+                                      "${max - curr} m3",
                                       style: titleMedium(
                                           fontColor: Palette.primaryColor),
                                       textAlign: TextAlign.start,
@@ -114,8 +127,11 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
                                 width: 50,
                                 decoration: BoxDecoration(
                                     color: Palette.primaryColor,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(200))),
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(200),
+                                        bottomRight: Radius.circular(200),
+                                        topLeft: Radius.circular(200),
+                                        topRight: Radius.circular(200))),
                               ),
                             ],
                           )),
@@ -141,7 +157,7 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
                     itemBuilder: (context, index) {
                       return Item(
                         name: data[index]["name"],
-                        catog: data[index]["category"],
+                        catog: data[index]["category"]["name"],
                         quantity: data[index]["quantity"],
                         volume: data[index]["volume"],
                       );

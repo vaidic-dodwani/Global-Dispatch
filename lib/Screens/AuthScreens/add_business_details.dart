@@ -12,7 +12,6 @@ import 'package:globaldispatch/Screens/Widgets/logo_with_name.dart';
 import 'package:globaldispatch/Screens/Widgets/name_text_area.dart';
 import 'package:globaldispatch/static_classes.dart';
 import 'package:go_router/go_router.dart';
-import 'package:toast/toast.dart';
 
 class AddBusinessDetails extends ConsumerWidget {
   AddBusinessDetails({
@@ -20,8 +19,8 @@ class AddBusinessDetails extends ConsumerWidget {
   });
 
   final businessNameArea = NameTextArea(
-    labelText: "Password",
-    hintText: "Atleast 8 characters",
+    labelText: "Business' Name",
+    hintText: "Enter Business' Name",
   );
 
   final ErrorLines buinessErrorLines = ErrorLines(
@@ -30,8 +29,8 @@ class AddBusinessDetails extends ConsumerWidget {
   );
 
   final ownerNameArea = NameTextArea(
-    labelText: "Password",
-    hintText: "Atleast 8 characters",
+    labelText: "Owner's Name",
+    hintText: "Enter Owner's Name",
   );
 
   final ErrorLines ownerNameErrorLines = ErrorLines(
@@ -66,7 +65,7 @@ class AddBusinessDetails extends ConsumerWidget {
                 const SizedBox(height: 12),
                 LogInButton(
                   loaderProvider: addBusinessDetailsButtonLoaderProvider,
-                  text: "Add De",
+                  text: "Add Details",
                   function: () async {
                     if ((ref.watch(addBusinessNameErrorProvider)).isEmpty) {
                       if ((ref.watch(addBusinessOwnerNameErrorProvider))
@@ -76,7 +75,9 @@ class AddBusinessDetails extends ConsumerWidget {
                             owner_name: ownerNameArea.controller.text,
                             business_name: businessNameArea.controller.text);
 
-                        if (response['statusCode'] == 200) {
+                        if (response['statusCode'] == 201) {
+                          App.isLoggedIn = true;
+
                           context.goNamed(RouteNames.homePage);
                         } else {
                           addBusinessOwnerNameErrorNotifier
