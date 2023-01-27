@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Screens/WarehousePage/customWidget.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 
 class WarehousePage extends ConsumerStatefulWidget {
@@ -10,6 +13,9 @@ class WarehousePage extends ConsumerStatefulWidget {
 }
 
 class _WarehousePageState extends ConsumerState<WarehousePage> {
+  double max = 100.0;
+  double curr = 60.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,66 +31,107 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
         ),
         elevation: 0,
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height * 0.4,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.3,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: SizedBox(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Max Capacity: ",
-                          style: titleMedium(),
-                          textAlign: TextAlign.start,
-                        ),
-                        Text(
-                          "${100} m3",
-                          style: titleMedium(fontColor: Palette.primaryColor),
-                          textAlign: TextAlign.start,
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: Row(
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Current Capacity: ",
-                            style: titleMedium(),
-                            textAlign: TextAlign.start,
+                          Row(
+                            children: [
+                              Text(
+                                "Max Capacity: ",
+                                style: titleMedium(),
+                                textAlign: TextAlign.start,
+                              ),
+                              Text(
+                                "${100} m3",
+                                style: titleMedium(
+                                    fontColor: Palette.primaryColor),
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
                           ),
-                          Text(
-                            "${50} m3",
-                            style: titleMedium(fontColor: Palette.primaryColor),
-                            textAlign: TextAlign.start,
-                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Current Capacity: ",
+                                  style: titleMedium(),
+                                  textAlign: TextAlign.start,
+                                ),
+                                Text(
+                                  "${50} m3",
+                                  style: titleMedium(
+                                      fontColor: Palette.primaryColor),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      child: Center(
+                          child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Container(
+                            height: 200,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: Palette.neutralGrey,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(200))),
+                          ),
+                          Container(
+                            height:
+                                ((((curr / (max)) * 100).floor() + 0.0) / 100) *
+                                    200,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: Palette.primaryColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(200))),
+                          ),
+                        ],
+                      )),
                     )
                   ],
                 ),
               ),
-              SizedBox(
-                // width: MediaQuery.of(context).size.width * 0.3,
-                child: Container(
-                  height: 200,
-                  width: 50,
-                  child: Container(
-                    color: Colors.amber,
-                  ),
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              "Items",
+              style: titleLarge(),
+              textAlign: TextAlign.start,
+            ),
+          ),
+          Expanded(
+              child: ListView.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return Item();
+            },
+          ))
+        ],
       ),
     );
   }

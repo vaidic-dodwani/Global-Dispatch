@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:globaldispatch/Routing/route_names.dart';
+
 import 'package:globaldispatch/Screens/AuthScreens/add_business_details.dart';
 import 'package:globaldispatch/Screens/AuthScreens/otp_page.dart';
+import 'package:globaldispatch/Screens/AddnewWarehouse/newWarehouse.dart';
+
 import 'package:globaldispatch/Screens/AuthScreens/sign_in_page.dart';
 import 'package:globaldispatch/Screens/AuthScreens/sign_up_page.dart';
 import 'package:globaldispatch/Screens/HomePage/home_page.dart';
@@ -44,6 +47,15 @@ class AppRouter {
               pageBuilder: (context, state) {
                 return MaterialPage(
                   child: WarehousePage(),
+                );
+              },
+            ),
+            GoRoute(
+              name: RouteNames.newWarehouse,
+              path: 'newwarehouse',
+              pageBuilder: (context, state) {
+                return MaterialPage(
+                  child: NewWarehouse(),
                 );
               },
             ),

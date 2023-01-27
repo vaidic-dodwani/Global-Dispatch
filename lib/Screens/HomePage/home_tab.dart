@@ -26,7 +26,10 @@ class HomeTab extends ConsumerWidget {
               children: [
                 authTitleMediumText("Your Warehouse"),
                 ElevatedButton(
-                    onPressed: () {}, child: Text("Add New Warehouse"))
+                    onPressed: () {
+
+                      context.go("/homepage/newwarehouse");
+                    }, child: Text("Add New Warehouse"))
               ],
             ),
             const SizedBox(height: 24),
