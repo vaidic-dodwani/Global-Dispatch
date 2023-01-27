@@ -102,6 +102,10 @@ class NameErrorNotifier extends StateNotifier<String> {
       state = "Enter Valid Name";
     }
   }
+
+  void setVal(String text) {
+    state = text;
+  }
 }
 
 class HomeBottomNavNotifier extends StateNotifier<int> {
