@@ -8,4 +8,5 @@ class RouteNames {
   static const String businessDetails = "businessdetails";
 
 
+  static const String newWarehouse = "newwarehouse";
 }
