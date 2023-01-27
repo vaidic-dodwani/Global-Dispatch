@@ -28,6 +28,7 @@ class HomePage extends ConsumerWidget {
 
 List<Widget> homePageWidgets = [
   const HomeTab()
+  
   // const InvestTab(),
   // const WalletTab(),
   // ProfileTab()

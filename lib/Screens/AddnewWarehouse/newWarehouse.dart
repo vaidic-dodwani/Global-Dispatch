@@ -5,6 +5,7 @@ import 'package:globaldispatch/Screens/AddnewWarehouse/services.dart';
 import 'package:globaldispatch/Screens/HomePage/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/email_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
+import 'package:globaldispatch/static_classes.dart';
 import 'package:toast/toast.dart';
 
 class NewWarehouse extends ConsumerStatefulWidget {
@@ -31,7 +32,7 @@ class _NewWarehouseState extends ConsumerState<NewWarehouse> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Buisness Name",
+            User.businessName ?? "",
             style: titleLarge(),
           ),
           elevation: 0,
