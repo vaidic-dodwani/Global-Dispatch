@@ -54,10 +54,9 @@ class HomeTab extends ConsumerWidget {
                           },
                           child: Warehouse(
                             location: (data[index]["location"].length > 12)
-                                ? data[index]["location"]
+                                ? "${data[index]["location"]
                                         .toString()
-                                        .substring(0, 12) +
-                                    "..."
+                                        .substring(0, 12)}..."
                                 : data[index]["location"],
                             capacity: data[index]["max_capacity"] -
                                 data[index]["present_capacity"],

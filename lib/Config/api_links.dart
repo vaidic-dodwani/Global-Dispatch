@@ -5,4 +5,5 @@ class Links {
   static const String sendEmailOtpLink = "auth/otp/";
   static const String verifyEmailOtpLink = "auth/otp_verify/";
   static const String addBusinessDetails = "business/";
+  static const String getUserTransactionHistory = "business/shipment/";
 }

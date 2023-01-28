@@ -138,4 +138,21 @@ class ApiCalls {
       log("$e");
     }
   }
+
+  static Future<dynamic> getUserTransactionHistory() async {
+    try {
+      Response response = await get(
+        Uri.parse(Links.prefixLink + Links.getUserTransactionHistory),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+
+      final output = jsonDecode(response.body);
+      return output;
+    } catch (e) {
+      log("errrrrrroooooooorrrrrrrrrr $e");
+    }
+  }
 }

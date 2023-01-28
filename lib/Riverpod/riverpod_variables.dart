@@ -1,5 +1,6 @@
 //  SIGN IN PAGE
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Config/api_integration.dart';
 import 'package:globaldispatch/Riverpod/riverpod_classes.dart';
 
 EmailErrorNotifier signInEmailErrorNotifer = EmailErrorNotifier();
@@ -128,4 +129,10 @@ final addBusinessDetailsButtonLoaderProvider =
   });
 
   return addBusinessDetailsButtonLoaderNotifier;
+});
+
+
+
+final getBusinessTransactionHistory = FutureProvider<dynamic>((ref) async {
+  return ApiCalls.getUserTransactionHistory();
 });
