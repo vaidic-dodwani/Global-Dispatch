@@ -22,7 +22,7 @@ class _TrackState extends ConsumerState<Track> {
         // if (data == false) {
         //   Navigator.pop(context);
         // }
-        log(data.toString());
+        log(data.toString() + "This");
         return SafeArea(
             child: Scaffold(
                 bottomNavigationBar: Row(
@@ -38,7 +38,21 @@ class _TrackState extends ConsumerState<Track> {
                                   right: BorderSide(
                                       color: Colors.black, width: 2))),
                           width: MediaQuery.of(context).size.width / 2,
-                          child: Center(child: Text("\$274"))),
+                          child: Center(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "\$${data["expected_price"]}",
+                                style: bodyLarge(),
+                              ),
+                              Text(
+                                "Predicted Prize",
+                                style: bodyMedium(),
+                              ),
+                            ],
+                          ))),
                       Container(
                           height: 56,
                           decoration: BoxDecoration(
@@ -49,7 +63,23 @@ class _TrackState extends ConsumerState<Track> {
                                   right: BorderSide(
                                       color: Colors.black, width: 2))),
                           width: MediaQuery.of(context).size.width / 2,
-                          child: Center(child: Text("Not Approved")))
+                          child: Center(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                data["final_price"] == null
+                                    ? "${data["status"]}"
+                                    : "${data["final_price"]}",
+                                style: bodyLarge(),
+                              ),
+                              Text(
+                                "final Prize",
+                                style: bodyMedium(),
+                              ),
+                            ],
+                          )))
                     ]),
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,8 +91,10 @@ class _TrackState extends ConsumerState<Track> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                          "USA",
-                          style: titleLarge(fontColor: Palette.primaryColor),
+                          data["source"]["location"].toString().substring(0,
+                              data["source"]["location"].toString().length - 3),
+                          style:
+                              headlineMedium(fontColor: Palette.primaryColor),
                         ),
                         Icon(
                           Icons.public,
@@ -70,9 +102,15 @@ class _TrackState extends ConsumerState<Track> {
                           color: Palette.secondaryCorrectColor,
                         ),
                         Text(
-                          "UK",
-                          style: titleLarge(fontColor: Palette.primaryColor),
-                        )
+                          data["source"]["location"].toString().substring(
+                              0,
+                              data["destination"]["location"]
+                                      .toString()
+                                      .length -
+                                  3),
+                          style:
+                              headlineMedium(fontColor: Palette.primaryColor),
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -92,7 +130,7 @@ class _TrackState extends ConsumerState<Track> {
                         width: double.infinity,
                         child: Text(
                           "Product",
-                          style: titleLarge(),
+                          style: headlineMedium(),
                         ),
                       ),
                     ),
@@ -108,17 +146,17 @@ class _TrackState extends ConsumerState<Track> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Name of the Product",
-                              style:
-                                  titleLarge(fontColor: Palette.primaryColor),
+                              "${data["commodity"]["name"]}",
+                              style: headlineLarge(
+                                  fontColor: Palette.primaryColor),
                             ),
                             Text(
-                              "Catog of the Product",
-                              style: bodyMedium(),
+                              "${data["commodity"]["category"]["name"].toString().substring(3).split("_").join(" ")}",
+                              style: headlineSmall(),
                             ),
                             Text(
-                              "Quanitity: ${5}",
-                              style: bodyMedium(),
+                              "Quanitity: ${data["quantity"]}",
+                              style: headlineSmall(),
                             )
                           ],
                         ),
