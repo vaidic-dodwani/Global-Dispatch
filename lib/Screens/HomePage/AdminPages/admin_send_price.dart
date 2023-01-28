@@ -17,7 +17,7 @@ class AdminSendPrice extends ConsumerWidget {
       backgroundColor: Palette.neutralBlack,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
               "Predicted Pricing$predictedPrice",
