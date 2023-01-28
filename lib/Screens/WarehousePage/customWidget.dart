@@ -21,20 +21,20 @@ class _ItemState extends ConsumerState<Item> {
   Widget build(BuildContext context) {
     name = widget.name;
     catog = widget.catog.toString().substring(3).split("_").join(" ");
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-      child: Container(
-          height: 72 * 1.5,
-          width: MediaQuery.of(context).size.width * 0.8,
-          decoration: const BoxDecoration(
-              color: Palette.neutralBlack,
-              borderRadius: BorderRadius.all(Radius.circular(8))),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+    return Container(
+        height: 72 * 1.5,
+        width: MediaQuery.of(context).size.width * 0.9,
+        decoration: const BoxDecoration(
+            color: Palette.neutralBlack,
+            borderRadius: BorderRadius.all(Radius.circular(8))),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.55,
+                child: Row(
                   children: [
                     const Icon(
                       Icons.inventory,
@@ -42,7 +42,7 @@ class _ItemState extends ConsumerState<Item> {
                       size: 30,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,19 +66,25 @@ class _ItemState extends ConsumerState<Item> {
                     )
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text("Quantity: ${widget.quantity}"),
-                    Text(
-                      "${widget.volume} m3",
-                      style: bodySmall(),
-                    )
-                  ],
-                )
-              ],
-            ),
-          )),
-    );
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Quantity ${widget.quantity}"),
+                      Text(
+                        "${widget.volume} m3",
+                        style: bodySmall(),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }

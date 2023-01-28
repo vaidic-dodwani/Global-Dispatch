@@ -7,7 +7,6 @@ import 'package:globaldispatch/Screens/WarehousePage/customWidget.dart';
 import 'package:globaldispatch/Screens/WarehousePage/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 import 'package:globaldispatch/static_classes.dart';
-import 'package:go_router/go_router.dart';
 
 class ItemsPage extends ConsumerStatefulWidget {
   const ItemsPage({super.key});
