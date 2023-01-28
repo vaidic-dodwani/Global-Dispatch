@@ -9,7 +9,11 @@ import 'package:globaldispatch/Screens/AuthScreens/sign_in_page.dart';
 import 'package:globaldispatch/Screens/AuthScreens/sign_up_page.dart';
 import 'package:globaldispatch/Screens/HomePage/home_page.dart';
 import 'package:globaldispatch/Screens/Items/items.dart';
+import 'package:globaldispatch/Screens/ItemsPage/itemspage.dart';
+import 'package:globaldispatch/Screens/Shipment/shipment.dart';
 import 'package:globaldispatch/Screens/WarehousePage/warehousePage.dart';
+import 'package:globaldispatch/Screens/bwarehouse/bwarehouse.dart';
+import 'package:globaldispatch/static_classes.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -19,9 +23,9 @@ class AppRouter {
         name: RouteNames.root,
         path: '/',
         pageBuilder: (context, state) {
-          return const MaterialPage(
-              // child: App.isLoggedIn ? const HomePage() : SignInPage());
-              child: HomePage());
+          return MaterialPage(
+              child: App.isLoggedIn ? const HomePage() : SignInPage());
+          // child: HomePage());
         },
       ),
       GoRoute(
@@ -70,6 +74,34 @@ class AppRouter {
                 );
               },
             ),
+            GoRoute(
+                name: RouteNames.bwarehouse,
+                path: 'bwarehouse',
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: BWarehouse(),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                name: RouteNames.itemspage,
+                path: 'itemspage',
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: ItemsPage(),
+                  );
+                },
+                routes: []),
+                ]),
+            GoRoute(
+                name: RouteNames.shipment,
+                path: 'shipment/:id',
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: Shipment(id: state.params["id"]),
+                  );
+                },
+                routes: []),
           ]),
       GoRoute(
           name: RouteNames.signUp,

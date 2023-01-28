@@ -20,7 +20,7 @@ class _ItemState extends ConsumerState<Item> {
   @override
   Widget build(BuildContext context) {
     name = widget.name;
-    catog = widget.catog.toString();
+    catog = widget.catog.toString().substring(3).split("_").join(" ");
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Container(

@@ -16,7 +16,7 @@ class HomeTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(warehouse_data);
-    
+
     return SizedBox(
       height: double.infinity,
       width: double.infinity,
@@ -47,11 +47,18 @@ class HomeTab extends ConsumerWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                           onTap: () {
-                            ref.watch(warehouseid.notifier).state = data[index]["id"];
-                            context.go("/homepage/warehousePage?id=${data[index]["id"]}");
+                            ref.watch(warehouseid.notifier).state =
+                                data[index]["id"];
+                            context.go(
+                                "/homepage/warehousePage?id=${data[index]["id"]}");
                           },
                           child: Warehouse(
-                            location: data[index]["location"],
+                            location: (data[index]["location"].length > 12)
+                                ? data[index]["location"]
+                                        .toString()
+                                        .substring(0, 12) +
+                                    "..."
+                                : data[index]["location"],
                             capacity: data[index]["max_capacity"] -
                                 data[index]["present_capacity"],
                           )),

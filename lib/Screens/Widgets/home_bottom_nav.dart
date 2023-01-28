@@ -66,11 +66,11 @@ List<Widget> bottomnavbaritems(int page) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.monetization_on_sharp,
+            Icons.flight_takeoff_sharp,
             color: page == 1 ? Palette.primaryColor : Palette.neutralGrey,
           ),
           Text(
-            "Invest",
+            "Transit",
             style: labelMedium(
                 fontColor:
                     page == 1 ? Palette.primaryColor : Palette.neutralGrey),
