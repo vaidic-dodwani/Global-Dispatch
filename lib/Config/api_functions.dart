@@ -15,6 +15,12 @@ Future initAuth() async {
     userDetailsInit(output);
     // await appInstanceInit();
     App.isLoggedIn = true;
+
+    if (prefs.containsKey("admin")) {
+      User.admin = prefs.getBool("admin");
+    } else {
+      User.admin = false;
+    }
   } else {
     App.isLoggedIn = false;
   }

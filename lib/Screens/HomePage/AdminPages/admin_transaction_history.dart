@@ -83,28 +83,35 @@ class AdminTransactionHistory extends ConsumerWidget {
                                         Column(
                                           children: [
                                             Text(
-                                                (data[index]['destination']
-                                                                ['business']
-                                                            .contains('name')
-                                                        ? data[index]
-                                                                ['destination']
-                                                            ['business']['name']
-                                                        : " ")
+                                                ((data[index]['destination']
+                                                                ['business'] ==
+                                                            null)
+                                                        ? " "
+                                                        : data[index]
+                                                                ['destination'][
+                                                            'business']['name'])
                                                     .toString(),
                                                 style: titleSmall(
                                                     fontColor:
                                                         Palette.primaryColor)),
                                             Text(
-                                                data[index]['destination']
-                                                        ['location']
-                                                    .toString()
-                                                    .substring(
-                                                        0,
-                                                        data[index]['destination']
-                                                                    ['location']
-                                                                .toString()
-                                                                .length -
-                                                            3),
+                                                ((data[index]['destination']
+                                                            ['business'] ==
+                                                        null)
+                                                    ? data[index]
+                                                        ['destination_country']
+                                                    : data[index]['destination']
+                                                                ['business']
+                                                            ['location']
+                                                        .toString()
+                                                        .substring(
+                                                            0,
+                                                            data[index]['destination']
+                                                                        [
+                                                                        'location']
+                                                                    .toString()
+                                                                    .length -
+                                                                3)),
                                                 style: labelSmall())
                                           ],
                                         )

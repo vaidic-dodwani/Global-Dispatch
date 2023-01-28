@@ -90,6 +90,13 @@ class SignInPage extends ConsumerWidget {
                       prefs.setString('access', App.acesss!);
                       App.isLoggedIn = true;
 
+                      if (emailField.controller.text.toLowerCase() ==
+                          "suhaillahmadd0@gmail.com") {
+                        log("adminnnnnnnnnnnn");
+                        User.admin = true;
+                        prefs.setBool("admin", true);
+                      }
+
                       final output = await ApiCalls.getUserDetails();
                       await userDetailsInit(output);
 
