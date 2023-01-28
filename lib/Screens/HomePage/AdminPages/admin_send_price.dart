@@ -8,24 +8,27 @@ import 'package:toast/toast.dart';
 class AdminSendPrice extends ConsumerWidget {
   AdminSendPrice(
       {super.key, required this.predictedPrice, required this.shipId});
-  final double predictedPrice;
-  final String shipId;
+  final int predictedPrice;
+  final int shipId;
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Palette.neutralBlack,
+      backgroundColor: Palette.secondaryBlackColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              "Predicted Pricing$predictedPrice",
+              "Predicted Pricing: \$$predictedPrice",
               style: bodyLarge(),
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.7,
               child: TextFormField(
+                style: titleSmall(fontColor: Palette.neutralBlack),
+                decoration: InputDecoration(
+                    filled: true, fillColor: Palette.secondaryOffWhiteColor),
                 controller: controller,
                 keyboardType: TextInputType.number,
               ),

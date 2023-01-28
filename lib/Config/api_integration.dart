@@ -157,19 +157,17 @@ class ApiCalls {
   }
 
   static Future<dynamic> finalPrice(
-      {required String shipId, required double price}) async {
+      {required int shipId, required int price}) async {
     try {
+      log(shipId.toString() + price.toString());
       final response = await put(
-        Uri.parse(Links.prefixLink + Links.signInLink),
+        Uri.parse("${Links.prefixLink}business/adm/ShipmentApproval/"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${App.acesss}'
         },
         body: jsonEncode(
-          <String, dynamic>{
-            "shipID": shipId.toLowerCase(),
-            "final_price": int.parse(price.toString())
-          },
+          <String, dynamic>{"shipID": shipId, "final_price": price},
         ),
       );
       log(response.statusCode.toString());

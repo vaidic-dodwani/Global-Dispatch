@@ -33,8 +33,7 @@ class AdminHomeTab extends ConsumerWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => AdminSendPrice(
-                            predictedPrice: price.floorToDouble(),
-                            shipId: shipid.toString()),
+                            predictedPrice: price, shipId: shipid),
                       ));
                 },
                 child: Padding(
