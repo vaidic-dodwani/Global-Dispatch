@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:globaldispatch/Screens/HomePage/AdminPages/admin_send_price.dart';
 import 'package:globaldispatch/Screens/HomePage/AdminPages/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 import 'package:globaldispatch/Screens/Widgets/warehouse.dart';
@@ -26,11 +27,14 @@ class AdminHomeTab extends ConsumerWidget {
               return GestureDetector(
                 onTap: () {
                   int shipid = data[index]["id"];
-                  int price = data[index]["final_price"];
+                  int price = data[index]["expected_price"];
+
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Container(),
+                        builder: (context) => AdminSendPrice(
+                            predictedPrice: price.floorToDouble(),
+                            shipId: shipid.toString()),
                       ));
                 },
                 child: Padding(
