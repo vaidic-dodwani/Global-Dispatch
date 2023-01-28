@@ -119,10 +119,7 @@ class TransactionHistory extends ConsumerWidget {
                                               style: labelSmall(),
                                             ),
                                             Text(
-                                              (data[index]['final_price'] ??
-                                                      data[index]
-                                                          ['expected_price'])
-                                                  .toString(),
+                                              "\$ ${data[index]['final_price'] ?? data[index]['expected_price']}",
                                               style: labelSmall(
                                                   fontColor: Palette
                                                       .secondaryCorrectColor),
