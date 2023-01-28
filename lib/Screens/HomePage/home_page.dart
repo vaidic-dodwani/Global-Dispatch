@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Riverpod/riverpod_variables.dart';
+import 'package:globaldispatch/Screens/Bus/bus.dart';
 import 'package:globaldispatch/Screens/HomePage/home_tab.dart';
 import 'package:globaldispatch/Screens/Widgets/home_app_bar.dart';
 import 'package:globaldispatch/Screens/Widgets/home_bottom_nav.dart';
@@ -27,8 +28,8 @@ class HomePage extends ConsumerWidget {
 }
 
 List<Widget> homePageWidgets = [
-  const HomeTab()
-  
+  const HomeTab(),
+  Bus(),
   // const InvestTab(),
   // const WalletTab(),
   // ProfileTab()

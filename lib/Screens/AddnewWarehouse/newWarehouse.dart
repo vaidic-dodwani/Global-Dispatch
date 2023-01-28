@@ -1,5 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:country_pickers/country.dart';
+import 'package:country_pickers/country_picker_cupertino.dart';
+import 'package:country_pickers/country_pickers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,7 +31,7 @@ class _NewWarehouseState extends ConsumerState<NewWarehouse> {
     hintText: "Enter Maximum Capacity",
     labelText: "Maximum Capacity",
   );
-
+  Country? _selectedCupertinoCountry;
   int cap = 0;
   @override
   Widget build(BuildContext context) {
@@ -54,7 +58,28 @@ class _NewWarehouseState extends ConsumerState<NewWarehouse> {
                   style: titleMedium(),
                 ),
               ),
-              locationArea,
+              TextButton(
+                onPressed: () => showCupertinoModalPopup<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return CountryPickerCupertino(
+                        pickerSheetHeight: 300.0,
+                        onValuePicked: (Country country) =>
+                            setState(() => _selectedCupertinoCountry = country),
+                        priorityList: [
+                          CountryPickerUtils.getCountryByIsoCode('TR'),
+                          CountryPickerUtils.getCountryByIsoCode('US'),
+                        ],
+                      );
+                    }),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Pick Country :"),
+                    Text(_selectedCupertinoCountry?.name ?? "")
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 16.0, top: 16),
                 child: Text(
@@ -67,10 +92,12 @@ class _NewWarehouseState extends ConsumerState<NewWarehouse> {
             ]),
         bottomNavigationBar: ElevatedButton(
             onPressed: () async {
-              if (locationArea.controller.text.isEmpty ||
+              if (_selectedCupertinoCountry == null ||
                   capacity.controller.text.isEmpty) return;
               NewWarehouse_service api = NewWarehouse_service();
-              var res = await api.addWarehouse(locationArea.controller.text,
+              var res = await api.addWarehouse(
+                  _selectedCupertinoCountry!.name +
+                      _selectedCupertinoCountry!.iso3Code,
                   int.parse(capacity.controller.text));
               ToastContext().init(context);
 

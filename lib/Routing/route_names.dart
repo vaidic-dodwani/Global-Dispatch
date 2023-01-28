@@ -7,6 +7,9 @@ class RouteNames {
   static const String warehousePage = "warehousepage";
   static const String businessDetails = "businessdetails";
   static const String items = "items";
+  static const String shipment = "shipment";
+  static const String bwarehouse = "bwarehouse";
+  static const String itemspage = "itemspage";
 
   static const String newWarehouse = "newwarehouse";
 }

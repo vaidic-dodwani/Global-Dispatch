@@ -24,14 +24,13 @@ Future appInstanceInit() async {
   final prefs = await SharedPreferences.getInstance();
 }
 
-Future userDetailsInit(Map<dynamic, dynamic> response) async {
+Future userDetailsInit(dynamic response) async {
   final prefs = await SharedPreferences.getInstance();
-  prefs.setInt('id', response['id']);
-  User.id = response['id'];
-  prefs.setString('business_name', response['name']);
-  User.businessName = response['name'];
-  prefs.setString('name', response['owner_name']);
-  User.name = response['owner_name'];
+  log(response.toString());
+  prefs.setString('business_name', response[0]['name']);
+  User.businessName = response[0]['name'];
+  prefs.setString('name', response[0]['owner_name']);
+  User.name = response[0]['owner_name'];
 }
 
 Future<void> clearData() async {
