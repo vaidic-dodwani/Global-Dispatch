@@ -168,7 +168,7 @@ class ApiCalls {
         body: jsonEncode(
           <String, dynamic>{
             "shipID": shipId.toLowerCase(),
-            "final_price": int.parse(price)
+            "final_price": int.parse(price.toString())
           },
         ),
       );
