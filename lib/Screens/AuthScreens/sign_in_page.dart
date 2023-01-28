@@ -90,7 +90,7 @@ class SignInPage extends ConsumerWidget {
                       prefs.setString('access', App.acesss!);
                       App.isLoggedIn = true;
 
-                      if (emailField.controller.text.toLowerCase() ==
+                      if (emailField.controller.text.toLowerCase().trim() ==
                           "suhaillahmadd0@gmail.com") {
                         log("adminnnnnnnnnnnn");
                         User.admin = true;
