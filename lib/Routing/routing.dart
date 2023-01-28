@@ -46,7 +46,7 @@ class AppRouter {
                 name: RouteNames.warehousePage,
                 path: 'warehousePage',
                 pageBuilder: (context, state) {
-                  return const MaterialPage(
+                  return MaterialPage(
                     child: WarehousePage(),
                   );
                 },

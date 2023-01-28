@@ -2,15 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Screens/Items/items.dart';
 import 'package:globaldispatch/Screens/WarehousePage/customWidget.dart';
 import 'package:globaldispatch/Screens/WarehousePage/provider.dart';
+import 'package:globaldispatch/Screens/Widgets/dropdown_button.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 import 'package:go_router/go_router.dart';
 
 class WarehousePage extends ConsumerStatefulWidget {
-  const WarehousePage({super.key, this.id});
+  WarehousePage({super.key, this.id});
   final id;
-
+  final dropDown = DropDownWidget();
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _WarehousePageState();
 }
@@ -23,6 +25,7 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
   Widget build(BuildContext context) {
     final data = ref.watch(warehousePage_data);
     final items_data = ref.watch(warehouseitemdata);
+    int categoryId = ref.watch(filterProvider);
     return data.when(
       data: (data) {
         max = data["max_capacity"];
@@ -108,33 +111,33 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.3,
                           child: Center(
-                              child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              Container(
-                                height: 200,
-                                width: 50,
-                                decoration: const BoxDecoration(
-                                    color: Palette.neutralGrey,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(200))),
-                              ),
-                              Container(
-                                height:
-                                    ((((curr / (max)) * 100).floor() + 0.0) /
-                                            100) *
-                                        200,
-                                width: 50,
-                                decoration: const BoxDecoration(
+                            child: Stack(
+                              alignment: Alignment.bottomCenter,
+                              children: [
+                                Container(
+                                  height: 200,
+                                  width: 50,
+                                  decoration: const BoxDecoration(
+                                      color: Palette.neutralGrey,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(200))),
+                                ),
+                                Container(
+                                  height:
+                                      ((((curr / (max)) * 100).floor() + 0.0) /
+                                              100) *
+                                          200,
+                                  width: 50,
+                                  decoration: const BoxDecoration(
                                     color: Palette.primaryColor,
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(200),
-                                        bottomRight: Radius.circular(200),
-                                        topLeft: Radius.circular(200),
-                                        topRight: Radius.circular(200))),
-                              ),
-                            ],
-                          )),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(200),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         )
                       ],
                     ),
@@ -149,17 +152,37 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
                   textAlign: TextAlign.start,
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    "Filter By:",
+                    style: titleMedium(),
+                  ),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: dropDown),
+                ],
+              ),
               Expanded(
                   child: items_data.when(
                 data: (data) {
+                  log(data.toString());
+                  List<Map<dynamic, dynamic>> filtered = [];
+
+                  data.forEach((element) {
+                    if (element['category']['id'] == categoryId) {
+                      filtered.add(element);
+                    }
+                  });
                   return ListView.builder(
-                    itemCount: data.length,
+                    itemCount: filtered.length,
                     itemBuilder: (context, index) {
                       return Item(
-                        name: data[index]["name"],
-                        catog: data[index]["category"]["name"],
-                        quantity: data[index]["quantity"],
-                        volume: data[index]["volume"],
+                        name: filtered[index]["name"],
+                        catog: filtered[index]["category"]["name"],
+                        quantity: filtered[index]["quantity"],
+                        volume: filtered[index]["volume"],
                       );
                     },
                   );

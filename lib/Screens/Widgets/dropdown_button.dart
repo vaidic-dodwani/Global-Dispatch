@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Screens/WarehousePage/provider.dart';
 
-class DropDownWidget extends StatefulWidget {
+class DropDownWidget extends ConsumerStatefulWidget {
   DropDownWidget({super.key});
+  var items = [
+    'Meat and edible meat offal',
+    'Fish crustaceans molluscs aquatic invertebrates ne',
+    'Dairy products eggs honey edible animal product nes',
+    'Products of animal origin nes',
+    'Live trees plants bulbs roots cut flowers etc',
+    'Edible vegetables and certain roots and tubers',
+    'Edible fruit nuts peel of citrus fruit melons',
+    "Coffee tea mate and spices",
+    "Cereals",
+    "Milling products malt starches inulin wheat glute",
+    'Oil seed oleagic fruits grain seed fruit etc ne'
+  ];
+  int selected = 0;
   int id = 2;
-
   @override
-  State<DropDownWidget> createState() => _DropDownWidgetState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _DropDownWidgetState();
 }
 
-var items = [
-  'Meat and edible meat offal',
-  'Fish crustaceans molluscs aquatic invertebrates ne',
-  'Dairy products eggs honey edible animal product nes',
-  'Products of animal origin nes',
-  'Live trees plants bulbs roots cut flowers etc',
-  'Edible vegetables and certain roots and tubers',
-  'Edible fruit nuts peel of citrus fruit melons',
-  "Coffee tea mate and spices",
-  "Cereals",
-  "Milling products malt starches inulin wheat glute",
-  'Oil seed oleagic fruits grain seed fruit etc ne'
-];
-int selected = 0;
-
-class _DropDownWidgetState extends State<DropDownWidget> {
+class _DropDownWidgetState extends ConsumerState<DropDownWidget> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton(
-      value: items[selected],
+      value: widget.items[widget.selected],
       isExpanded: true,
-      items: items.map(
+      items: widget.items.map(
         (String items) {
           return DropdownMenuItem(
             value: items,
@@ -39,9 +39,10 @@ class _DropDownWidgetState extends State<DropDownWidget> {
       ).toList(),
       onChanged: (value) {
         setState(() {
-          selected = items.indexOf(value!);
-          widget.id = selected + 2;
+          widget.selected = widget.items.indexOf(value!);
+          widget.id = widget.selected + 2;
         });
+        ref.watch(filterProvider.notifier).state = widget.id;
       },
     );
   }
