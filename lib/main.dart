@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme:
             const ColorScheme.light().copyWith(primary: Palette.primaryColor),
       ),
+      // theme: ThemeData(primaryColor: Colors.lightBlue.withOpacity(0.8)),
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
     );

@@ -10,6 +10,7 @@ class RouteNames {
   static const String shipment = "shipment";
   static const String bwarehouse = "bwarehouse";
   static const String itemspage = "itemspage";
+  static const String customer = "customer";
 
   static const String newWarehouse = "newwarehouse";
 }

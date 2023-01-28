@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Config/api_integration.dart';
 import 'package:globaldispatch/Riverpod/riverpod_variables.dart';
 import 'package:globaldispatch/Routing/route_names.dart';
+import 'package:globaldispatch/Screens/AuthScreens/track.dart';
 import 'package:globaldispatch/Screens/Widgets/auth_heading.dart';
 import 'package:globaldispatch/Screens/Widgets/email_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/form_errors.dart';
@@ -13,6 +14,7 @@ import 'package:globaldispatch/Screens/Widgets/log_in_button.dart';
 import 'package:globaldispatch/Screens/Widgets/logo_with_name.dart';
 import 'package:globaldispatch/Screens/Widgets/password_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/sign_in_up_tabs.dart';
+import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 import 'package:globaldispatch/static_classes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,6 +39,8 @@ class SignInPage extends ConsumerWidget {
     errorProvider: signInPasswordErrorProvider,
     height: 32,
   );
+  final shipid = EmailTextArea(
+      labelText: "Shipment ID", hintText: "Enter your Shipment ID");
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -93,6 +97,41 @@ class SignInPage extends ConsumerWidget {
                 },
               ),
               const SizedBox(height: 20),
+              Text(
+                "or\n Track Your Shipment",
+                style: bodyMedium(),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              shipid,
+              const SizedBox(height: 20),
+              // ElevatedButton(onPressed: () {}, child: Text("Track",style: ,))
+              TextButton(
+                onPressed: () {
+                  if (shipid.controller.text.isEmpty) {
+                    return;
+                  }
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Track(),
+                      ));
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 2,
+                          color: Palette.primaryColor,
+                        ),
+                        borderRadius: BorderRadius.circular(8)),
+                    width: MediaQuery.of(context).size.width - 30,
+                    height: 48,
+                    child: Center(
+                        child: Text(
+                      "Track",
+                      style: titleMedium(fontColor: Palette.primaryColor),
+                    ))),
+              )
             ],
           ),
         ]),

@@ -36,11 +36,16 @@ class _BusState extends ConsumerState<Bus> {
                 itemCount: data.length + 1,
                 itemBuilder: (context, index) {
                   if (index == 0) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Business(
-                        name: "Customer",
-                        owner: "",
+                    return GestureDetector(
+                      onTap: () {
+                        context.go("/homepage/customer");
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.0),
+                        child: Business(
+                          name: "Customer",
+                          owner: "",
+                        ),
                       ),
                     );
                   }

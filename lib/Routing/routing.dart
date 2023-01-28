@@ -7,6 +7,7 @@ import 'package:globaldispatch/Screens/AddnewWarehouse/newWarehouse.dart';
 
 import 'package:globaldispatch/Screens/AuthScreens/sign_in_page.dart';
 import 'package:globaldispatch/Screens/AuthScreens/sign_up_page.dart';
+import 'package:globaldispatch/Screens/Customer/customer.dart';
 import 'package:globaldispatch/Screens/HomePage/home_page.dart';
 import 'package:globaldispatch/Screens/Items/items.dart';
 import 'package:globaldispatch/Screens/ItemsPage/itemspage.dart';
@@ -75,6 +76,15 @@ class AppRouter {
               },
             ),
             GoRoute(
+              name: RouteNames.customer,
+              path: 'customer',
+              pageBuilder: (context, state) {
+                return const MaterialPage(
+                  child: Customer(),
+                );
+              },
+            ),
+            GoRoute(
                 name: RouteNames.bwarehouse,
                 path: 'bwarehouse',
                 pageBuilder: (context, state) {
@@ -84,14 +94,14 @@ class AppRouter {
                 },
                 routes: [
                   GoRoute(
-                name: RouteNames.itemspage,
-                path: 'itemspage',
-                pageBuilder: (context, state) {
-                  return MaterialPage(
-                    child: ItemsPage(),
-                  );
-                },
-                routes: []),
+                      name: RouteNames.itemspage,
+                      path: 'itemspage',
+                      pageBuilder: (context, state) {
+                        return MaterialPage(
+                          child: ItemsPage(),
+                        );
+                      },
+                      routes: []),
                 ]),
             GoRoute(
                 name: RouteNames.shipment,

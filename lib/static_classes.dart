@@ -16,4 +16,5 @@ class Redirects {
   static int? shipmentDepartureId;
   static int? shipmentSelectedItemId;
 static int? shipmentSelectedItemQuantity;
+static String? shipmentDestinationLocation;
 }
