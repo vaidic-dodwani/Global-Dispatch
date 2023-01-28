@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Config/api_functions.dart';
 import 'package:globaldispatch/Config/api_integration.dart';
 import 'package:globaldispatch/Riverpod/riverpod_variables.dart';
 import 'package:globaldispatch/Routing/route_names.dart';
@@ -88,6 +89,10 @@ class SignInPage extends ConsumerWidget {
                       log(App.acesss!);
                       prefs.setString('access', App.acesss!);
                       App.isLoggedIn = true;
+
+                      final output = await ApiCalls.getUserDetails();
+                      await userDetailsInit(output);
+
                       context.goNamed(RouteNames.homePage);
                     } else {
                       signInPasswordErrorNotifer
