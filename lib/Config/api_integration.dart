@@ -155,4 +155,32 @@ class ApiCalls {
       log("errrrrrroooooooorrrrrrrrrr $e");
     }
   }
+
+  static Future<dynamic> finalPrice(
+      {required String shipId, required double price}) async {
+    try {
+      final response = await put(
+        Uri.parse(Links.prefixLink + Links.signInLink),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            "shipID": shipId.toLowerCase(),
+            "final_price": int.parse(price)
+          },
+        ),
+      );
+      log(response.statusCode.toString());
+
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+      log(output.toString());
+
+      return output;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
