@@ -7,6 +7,7 @@ import 'package:globaldispatch/Config/api_integration.dart';
 import 'package:globaldispatch/Riverpod/riverpod_variables.dart';
 import 'package:globaldispatch/Routing/route_names.dart';
 import 'package:globaldispatch/Screens/AuthScreens/track.dart';
+import 'package:globaldispatch/Screens/AuthScreens/track/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/auth_heading.dart';
 import 'package:globaldispatch/Screens/Widgets/email_text_area.dart';
 import 'package:globaldispatch/Screens/Widgets/form_errors.dart';
@@ -111,6 +112,7 @@ class SignInPage extends ConsumerWidget {
                   if (shipid.controller.text.isEmpty) {
                     return;
                   }
+                  ref.watch(shipidprov.notifier).state = shipid.controller.text;
                   Navigator.push(
                       context,
                       MaterialPageRoute(

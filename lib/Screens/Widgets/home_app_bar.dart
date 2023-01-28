@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 import 'package:globaldispatch/static_classes.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 PreferredSize homeAppBar() {
   return PreferredSize(
@@ -19,8 +21,18 @@ PreferredSize homeAppBar() {
             backgroundImage: AssetImage("assests/logo/logo.png"),
           ),
         ),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                final pref = await SharedPreferences.getInstance();
+                pref.clear();
+                App.isLoggedIn = false;
+                context.go("/signin");
+              },
+              icon: Icon(Icons.logout))
+        ],
         title: Text(
-         User.businessName??"" ,
+          User.businessName ?? "",
           style: bodyMedium(),
         ),
       ),
