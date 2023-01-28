@@ -5,14 +5,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Screens/Items/items.dart';
 import 'package:globaldispatch/Screens/WarehousePage/customWidget.dart';
 import 'package:globaldispatch/Screens/WarehousePage/provider.dart';
-import 'package:globaldispatch/Screens/Widgets/dropdown_button.dart';
+import 'package:globaldispatch/Screens/Widgets/dropdown_button_with_all.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 import 'package:go_router/go_router.dart';
 
 class WarehousePage extends ConsumerStatefulWidget {
   WarehousePage({super.key, this.id});
   final id;
-  final dropDown = DropDownWidgetWithAll();
+  final dropDown = WithAll();
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _WarehousePageState();
 }
