@@ -9,7 +9,7 @@ class User {
   static String? name;
   static String? email;
   static String? password;
-  static bool? admin;
+  static bool admin = true;
 }
 
 class Redirects {
