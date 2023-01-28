@@ -29,7 +29,8 @@ class _ItemNumberState extends ConsumerState<ItemNumber> {
             onPressed: () async {
               ItemNum api = ItemNum();
               var res;
-              if (Redirects.shipmentDestinationLocation!.isEmpty) {
+              if (Redirects.shipmentDestinationLocation == null ||
+                  Redirects.shipmentDestinationLocation!.isEmpty) {
                 res = await api.getPrediction(
                     Redirects.shipmentDepartureId ?? 0,
                     Redirects.shipmentDestinationId ?? 0,

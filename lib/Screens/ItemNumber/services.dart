@@ -8,7 +8,7 @@ class ItemNum {
       String location) async {
     Dio dio = Dio();
     String token = App.acesss ?? "";
-    String endpoint = "http://20.207.198.132/business/shipment/send/";
+    String endpoint = "http://20.207.198.132/business/shipment/";
     dio.options.headers["Authorization"] = "Bearer ${token}";
     Response res;
     if (location.isEmpty) {
