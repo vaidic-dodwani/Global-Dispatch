@@ -167,7 +167,11 @@ class ApiCalls {
           'Authorization': 'Bearer ${App.acesss}'
         },
         body: jsonEncode(
-          <String, dynamic>{"shipID": shipId, "final_price": price},
+          <String, dynamic>{
+            "shipID": shipId,
+            "final_price": price,
+            "status": "approved"
+          },
         ),
       );
       log(response.statusCode.toString());
