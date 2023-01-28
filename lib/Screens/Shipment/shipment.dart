@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Screens/Shipment/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 import 'package:globaldispatch/Screens/Widgets/warehouse.dart';
+import 'package:globaldispatch/static_classes.dart';
 import 'package:go_router/go_router.dart';
 
 class Shipment extends ConsumerStatefulWidget {
@@ -37,7 +38,7 @@ class _ShipmentState extends ConsumerState<Shipment> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        log("Here");
+                        Redirects.shipmentDestinationId = data[index]['id'];
                         context.go("/homepage/bwarehouse");
                       },
                       child: Padding(
@@ -52,7 +53,7 @@ class _ShipmentState extends ConsumerState<Shipment> {
                 );
               },
               error: (error, stackTrace) => Text(error.toString()),
-              loading: () => Center(
+              loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
             ))

@@ -1,7 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Config/api_functions.dart';
 import 'package:globaldispatch/Config/api_integration.dart';
 import 'package:globaldispatch/Riverpod/riverpod_variables.dart';
 import 'package:globaldispatch/Routing/route_names.dart';
@@ -53,7 +56,7 @@ class AddBusinessDetails extends ConsumerWidget {
                 const SizedBox(height: 38),
                 const CenterLogo(),
                 const SizedBox(height: 112),
-                authHeading("Set Password"),
+                authHeading("Add Your Business Details"),
                 const SizedBox(height: 44),
                 businessNameArea,
                 const SizedBox(height: 4),
@@ -77,7 +80,9 @@ class AddBusinessDetails extends ConsumerWidget {
 
                         if (response['statusCode'] == 201) {
                           App.isLoggedIn = true;
-
+                          final output = await ApiCalls.getUserDetails();
+                          log("user details$output");
+                          await userDetailsInit(output);
                           context.goNamed(RouteNames.homePage);
                         } else {
                           addBusinessOwnerNameErrorNotifier

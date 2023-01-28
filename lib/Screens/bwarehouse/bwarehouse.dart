@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Screens/HomePage/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 import 'package:globaldispatch/Screens/Widgets/warehouse.dart';
+import 'package:globaldispatch/static_classes.dart';
 import 'package:go_router/go_router.dart';
 
 import '../WarehousePage/provider.dart';
@@ -42,20 +43,23 @@ class _BWarehouseState extends ConsumerState<BWarehouse> {
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                               onTap: () {
+                                Redirects.shipmentDepartureId =
+                                    data[index]['id'];
                                 ref.watch(warehouseid.notifier).state =
                                     data[index]["id"];
-                                context.go(
-                                    "/homepage/bwarehouse/itemspage");
+                                context.go("/homepage/bwarehouse/itemspage");
                               },
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical:8.0),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
                                 child: Warehouse(
-                                  location: (data[index]["location"].length > 12)
-                                      ? data[index]["location"]
-                                              .toString()
-                                              .substring(0, 12) +
-                                          "..."
-                                      : data[index]["location"],
+                                  location:
+                                      (data[index]["location"].length > 12)
+                                          ? data[index]["location"]
+                                                  .toString()
+                                                  .substring(0, 12) +
+                                              "..."
+                                          : data[index]["location"],
                                   capacity: data[index]["max_capacity"] -
                                       data[index]["present_capacity"],
                                 ),

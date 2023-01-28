@@ -42,7 +42,9 @@ class _WarehouseState extends ConsumerState<Warehouse> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${widget.location}",
+                        widget.location
+                            .toString()
+                            .substring(0, widget.location.length - 3),
                         style: titleMedium(),
                       ),
                       Padding(

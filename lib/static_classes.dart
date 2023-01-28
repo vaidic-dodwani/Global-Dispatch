@@ -10,3 +10,10 @@ class User {
   static String? email;
   static String? password;
 }
+
+class Redirects {
+  static int? shipmentDestinationId;
+  static int? shipmentDepartureId;
+  static int? shipmentSelectedItemId;
+static int? shipmentSelectedItemQuantity;
+}

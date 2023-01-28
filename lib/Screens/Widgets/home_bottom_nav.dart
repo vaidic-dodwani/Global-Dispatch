@@ -86,11 +86,11 @@ List<Widget> bottomnavbaritems(int page) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.wallet_sharp,
+            Icons.flight_land_sharp,
             color: page == 2 ? Palette.primaryColor : Palette.neutralGrey,
           ),
           Text(
-            "Wallet",
+            "Shipments",
             style: labelMedium(
                 fontColor:
                     page == 2 ? Palette.primaryColor : Palette.neutralGrey),
@@ -98,25 +98,5 @@ List<Widget> bottomnavbaritems(int page) {
         ],
       ),
     ),
-    InkWell(
-      onTap: () {
-        homeBottomNavNotifier.setPage(3);
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.person_outline_sharp,
-            color: page == 3 ? Palette.primaryColor : Palette.neutralGrey,
-          ),
-          Text(
-            "Profile",
-            style: labelMedium(
-                fontColor:
-                    page == 3 ? Palette.primaryColor : Palette.neutralGrey),
-          )
-        ],
-      ),
-    )
   ];
 }

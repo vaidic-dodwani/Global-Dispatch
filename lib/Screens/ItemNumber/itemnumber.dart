@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:globaldispatch/Screens/Shipment/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
+import 'package:globaldispatch/static_classes.dart';
 
 class ItemNumber extends ConsumerStatefulWidget {
   const ItemNumber({super.key, this.cap});
@@ -13,10 +17,18 @@ class _ItemNumberState extends ConsumerState<ItemNumber> {
   int n = 0;
   @override
   Widget build(BuildContext context) {
+    Redirects.shipmentSelectedItemQuantity = n;
+
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              log(ref.watch(busid.notifier).state.toString());
+              log(Redirects.shipmentDestinationId.toString());
+              log(Redirects.shipmentDepartureId.toString());
+              log(Redirects.shipmentSelectedItemId.toString());
+              log(Redirects.shipmentSelectedItemQuantity.toString());
+            },
             child: Container(
                 height: 56, child: Center(child: Text("Create Shipment")))),
         body: Padding(

@@ -33,7 +33,7 @@ class HomeTab extends ConsumerWidget {
                     onPressed: () {
                       context.go("/homepage/newwarehouse");
                     },
-                    child: Text("Add New Warehouse"))
+                    child: const Text("Add New Warehouse"))
               ],
             ),
             const SizedBox(height: 24),
@@ -69,7 +69,7 @@ class HomeTab extends ConsumerWidget {
               error: (error, stackTrace) {
                 return Text(error.toString());
               },
-              loading: () => Center(child: CircularProgressIndicator()),
+              loading: () => const Center(child: CircularProgressIndicator()),
             ))
           ],
         ),

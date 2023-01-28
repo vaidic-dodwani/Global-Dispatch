@@ -47,3 +47,56 @@ class _DropDownWidgetState extends ConsumerState<DropDownWidget> {
     );
   }
 }
+
+class DropDownWidgetWithAll extends ConsumerStatefulWidget {
+  DropDownWidgetWithAll({super.key});
+  var itemsWithAll = [
+    "All",
+    'Meat and edible meat offal',
+    'Fish crustaceans molluscs aquatic invertebrates ne',
+    'Dairy products eggs honey edible animal product nes',
+    'Products of animal origin nes',
+    'Live trees plants bulbs roots cut flowers etc',
+    'Edible vegetables and certain roots and tubers',
+    'Edible fruit nuts peel of citrus fruit melons',
+    "Coffee tea mate and spices",
+    "Cereals",
+    "Milling products malt starches inulin wheat glute",
+    'Oil seed oleagic fruits grain seed fruit etc ne'
+  ];
+  int selected = 0;
+  int id = 0;
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _DropDownWidgetWithAllState();
+}
+
+class _DropDownWidgetWithAllState extends ConsumerState<DropDownWidgetWithAll> {
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton(
+      value: widget.itemsWithAll[widget.selected],
+      isExpanded: true,
+      items: widget.itemsWithAll.map(
+        (String items) {
+          return DropdownMenuItem(
+            value: items,
+            child: Text(items),
+          );
+        },
+      ).toList(),
+      onChanged: (value) {
+        setState(() {
+          widget.selected = widget.itemsWithAll.indexOf(value!);
+
+          if (widget.selected == 0) {
+            widget.id = 0;
+          }
+
+          widget.id = widget.selected + 2;
+        });
+        ref.watch(filterProvider.notifier).state = widget.id;
+      },
+    );
+  }
+}

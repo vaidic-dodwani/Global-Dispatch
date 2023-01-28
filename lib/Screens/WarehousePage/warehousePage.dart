@@ -12,7 +12,7 @@ import 'package:go_router/go_router.dart';
 class WarehousePage extends ConsumerStatefulWidget {
   WarehousePage({super.key, this.id});
   final id;
-  final dropDown = DropDownWidget();
+  final dropDown = DropDownWidgetWithAll();
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _WarehousePageState();
 }
@@ -46,7 +46,9 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
             ),
             backgroundColor: Colors.transparent,
             title: Text(
-              "${data["location"]}",
+              data["location"]
+                  .toString()
+                  .substring(0, data["location"].length - 3),
               style: titleLarge(),
             ),
             elevation: 0,
@@ -78,7 +80,7 @@ class _WarehousePageState extends ConsumerState<WarehousePage> {
                                   ),
                                   SizedBox(
                                     child: Text(
-                                      "${max} m3",
+                                      "$max m3",
                                       style: titleMedium(
                                           fontColor: Palette.primaryColor),
                                       textAlign: TextAlign.start,

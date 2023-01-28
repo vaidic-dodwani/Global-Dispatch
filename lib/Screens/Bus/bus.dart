@@ -19,7 +19,7 @@ class _BusState extends ConsumerState<Bus> {
   @override
   Widget build(BuildContext context) {
     final data = ref.watch(business_data);
-    return Container(
+    return SizedBox(
       height: double.infinity,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -36,8 +36,8 @@ class _BusState extends ConsumerState<Bus> {
                 itemCount: data.length + 1,
                 itemBuilder: (context, index) {
                   if (index == 0) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
                       child: Business(
                         name: "Customer",
                         owner: "",
@@ -62,7 +62,7 @@ class _BusState extends ConsumerState<Bus> {
               );
             },
             error: (error, stackTrace) => Text(error.toString()),
-            loading: () => Center(
+            loading: () => const Center(
               child: CircularProgressIndicator(),
             ),
           ))

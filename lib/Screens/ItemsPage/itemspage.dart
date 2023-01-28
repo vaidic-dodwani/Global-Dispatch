@@ -6,6 +6,7 @@ import 'package:globaldispatch/Screens/ItemNumber/itemnumber.dart';
 import 'package:globaldispatch/Screens/WarehousePage/customWidget.dart';
 import 'package:globaldispatch/Screens/WarehousePage/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
+import 'package:globaldispatch/static_classes.dart';
 import 'package:go_router/go_router.dart';
 
 class ItemsPage extends ConsumerStatefulWidget {
@@ -41,6 +42,9 @@ class _ItemsPageState extends ConsumerState<ItemsPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                               onTap: () {
+                                Redirects.shipmentSelectedItemId =
+                                    data[index]['id'];
+
                                 // ref.watch(warehouseid.notifier).state =
                                 //     data[index]["id"];
                                 // context.go(

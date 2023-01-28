@@ -48,9 +48,7 @@ class OtpPage extends StatelessWidget {
                       final prefs = await SharedPreferences.getInstance();
 
                       App.acesss = sigUpRes['tokens']['access'];
-                      final output = await ApiCalls.getUserDetails();
-                      log("user details$output");
-                      userDetailsInit(output);
+                      
                       prefs.setString("access", App.acesss!);
                       context.goNamed(RouteNames.businessDetails,
                           params: {'email': email});
