@@ -97,7 +97,6 @@ final forgetPassOtpButtonLoaderProvider =
   return forgetPassOtpButtonLoaderNotifier;
 });
 
-
 // Add business details
 
 NameErrorNotifier addBusinessNameErrorNotifier = NameErrorNotifier();
@@ -120,7 +119,8 @@ final addBusinessOwnerNameErrorProvider =
   return addBusinessOwnerNameErrorNotifier;
 });
 
-ButtonLoaderNotifier addBusinessDetailsButtonLoaderNotifier = ButtonLoaderNotifier();
+ButtonLoaderNotifier addBusinessDetailsButtonLoaderNotifier =
+    ButtonLoaderNotifier();
 
 final addBusinessDetailsButtonLoaderProvider =
     StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
@@ -130,9 +130,10 @@ final addBusinessDetailsButtonLoaderProvider =
 
   return addBusinessDetailsButtonLoaderNotifier;
 });
-
-
-
 final getBusinessTransactionHistory = FutureProvider<dynamic>((ref) async {
   return ApiCalls.getUserTransactionHistory();
+});
+
+final getAdminTransactionHistory = FutureProvider<dynamic>((ref) async {
+  return ApiCalls.getAdminTransactionHistory();
 });

@@ -156,6 +156,25 @@ class ApiCalls {
     }
   }
 
+  static Future<dynamic> getAdminTransactionHistory() async {
+    try {
+      log("getting admin hist");
+      Response response = await get(
+        Uri.parse(Links.prefixLink + Links.adminHi),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+
+      final output = jsonDecode(response.body);
+      log(output.toString());
+      return output;
+    } catch (e) {
+      log("errrrrrroooooooorrrrrrrrrr $e");
+    }
+  }
+
   static Future<dynamic> finalPrice(
       {required int shipId, required int price}) async {
     try {

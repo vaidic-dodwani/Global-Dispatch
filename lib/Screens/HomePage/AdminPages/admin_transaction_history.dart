@@ -10,7 +10,7 @@ class AdminTransactionHistory extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final history = ref.watch(getBusinessTransactionHistory);
+    final history = ref.watch(getAdminTransactionHistory);
 
     return history.when(
       data: (data) {
@@ -97,11 +97,10 @@ class AdminTransactionHistory extends ConsumerWidget {
                                             Text(
                                                 ((data[index]['destination']
                                                             ['business'] ==
-                                                        null)
+                                                        "null")
                                                     ? data[index]
                                                         ['destination_country']
                                                     : data[index]['destination']
-                                                                ['business']
                                                             ['location']
                                                         .toString()
                                                         .substring(
@@ -130,7 +129,9 @@ class AdminTransactionHistory extends ConsumerWidget {
                                               style: labelSmall(),
                                             ),
                                             Text(
-                                              "\$ ${data[index]['final_price'] ?? data[index]['expected_price']}",
+                                              data[index]['final_price'] == null
+                                                  ? "${data[index]['expected_price']}"
+                                                  : "${data[index]['final_price']}",
                                               style: labelSmall(
                                                   fontColor: Palette
                                                       .secondaryCorrectColor),

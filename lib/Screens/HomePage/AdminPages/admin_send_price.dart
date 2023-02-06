@@ -1,6 +1,10 @@
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:globaldispatch/Config/api_integration.dart';
+import 'package:globaldispatch/Riverpod/riverpod_variables.dart';
+import 'package:globaldispatch/Screens/HomePage/AdminPages/provider.dart';
 import 'package:globaldispatch/Screens/Widgets/utilities.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toast/toast.dart';
@@ -36,10 +40,14 @@ class AdminSendPrice extends ConsumerWidget {
             ElevatedButton(
               onPressed: () async {
                 final output = await ApiCalls.finalPrice(
-                    shipId: shipId, price: predictedPrice);
+                    shipId: shipId, price: int.parse(controller.text));
                 if (output['statusCode'] == 200) {
+                  ref.refresh(getBusinessTransactionHistory);
+                  ref.refresh(admin_data);
                   context.pop();
                 } else {
+                  ref.refresh(getBusinessTransactionHistory);
+                  ref.refresh(admin_data);
                   ToastContext().init(context);
                   Toast.show(output[output.keys.first][0],
                       duration: 5, gravity: Toast.bottom);

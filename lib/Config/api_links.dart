@@ -6,4 +6,6 @@ class Links {
   static const String verifyEmailOtpLink = "auth/otp_verify/";
   static const String addBusinessDetails = "business/";
   static const String getUserTransactionHistory = "business/shipment/";
+  static const String adminHi = "business/adm/ShipmentView/";
+
 }
